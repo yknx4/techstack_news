@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  db:
+    image: "postgres:13-alpine"
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pg-techstack:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  redis:
+    image: "redis:6-alpine"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-techstack:/data
+    ports:
+      - 6379:6379
+volumes:
+  redis-techstack:
+  pg-techstack:

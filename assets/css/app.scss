@@ -1,0 +1,9 @@
+/* This file is for your main application css. */
+@import "./phoenix.css";
+
+h1 {
+  span:nth-child(1) {
+    font-weight: 300;
+  }
+}
+

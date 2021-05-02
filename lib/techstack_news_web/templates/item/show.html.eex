@@ -1,0 +1,23 @@
+<h1>Show Item</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @item.title %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @item.url %>
+  </li>
+
+  <li>
+    <strong>published at:</strong>
+    <%= @item.published_at %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.item_path(@conn, :edit, @item) %></span>
+<span><%= link "Back", to: Routes.item_path(@conn, :index) %></span>

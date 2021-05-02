@@ -1,0 +1,3 @@
+<main role="main" class="text-gray-600 body-font container px-5 py-24 mx-auto">
+  <%= @inner_content %>
+</main>
