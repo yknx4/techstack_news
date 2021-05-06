@@ -21,18 +21,19 @@ defmodule TechstackNews.News do
     cursor_after = Keyword.get(opts, :after)
     cursor_before = Keyword.get(opts, :before)
 
-    query = from(i in Item, order_by: [asc: i.published_at, asc: i.id])
+    query = from(i in Item, order_by: [desc: i.published_at, desc: i.id])
+    cursor_fields = [{:published_at, :desc}, {:id, :desc}]
 
     cond do
       !is_nil(cursor_after) ->
-        query |> Repo.paginate(after: cursor_after, cursor_fields: [:published_at, :id], limit: 9)
+        query |> Repo.paginate(after: cursor_after, cursor_fields: cursor_fields, limit: 9)
 
       !is_nil(cursor_before) ->
         query
-        |> Repo.paginate(before: cursor_before, cursor_fields: [:published_at, :id], limit: 9)
+        |> Repo.paginate(before: cursor_before, cursor_fields: cursor_fields, limit: 9)
 
       true ->
-        query |> Repo.paginate(cursor_fields: [:published_at, :id], limit: 9)
+        query |> Repo.paginate(cursor_fields: cursor_fields, limit: 9)
     end
   end
 

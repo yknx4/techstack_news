@@ -29,41 +29,13 @@ config :tesla, adapter: Tesla.Adapter.Hackney
 
 config :techstack_news, TechstackNews.Scheduler,
   jobs: [
-    {"*/15 * * * *",
-     fn ->
-       TechstackNews.Crawlers.HackerNews.home()
-       |> Enum.map(fn i -> TechstackNews.News.upsert_item(i) end)
-     end},
+    {"*/15 * * * *", {TechstackNews.Crawlers, :hacker_news, []}},
     {"*/30 * * * *",
-     fn ->
-       TechstackNews.Crawlers.RSS.rss("https://www.reddit.com/r/programming/.rss")
-       |> Enum.map(fn i -> TechstackNews.News.upsert_item(i) end)
-     end},
-    {"*/30 * * * *",
-     fn ->
-       TechstackNews.Crawlers.RSS.rss("https://www.androidpolice.com/feed/")
-       |> Enum.map(fn i -> TechstackNews.News.upsert_item(i) end)
-     end},
-    {"*/30 * * * *",
-     fn ->
-       TechstackNews.Crawlers.RSS.rss("https://www.xda-developers.com/feed/")
-       |> Enum.map(fn i -> TechstackNews.News.upsert_item(i) end)
-     end},
-    {"*/30 * * * *",
-     fn ->
-       TechstackNews.Crawlers.RSS.rss("https://arstechnica.com/feed/")
-       |> Enum.map(fn i -> TechstackNews.News.upsert_item(i) end)
-     end},
-    {"*/30 * * * *",
-     fn ->
-       TechstackNews.Crawlers.RSS.rss("https://gizmodo.com/rss")
-       |> Enum.map(fn i -> TechstackNews.News.upsert_item(i) end)
-     end},
-    {"*/30 * * * *",
-     fn ->
-       TechstackNews.Crawlers.RSS.rss("https://www.engadget.com/rss.xml")
-       |> Enum.map(fn i -> TechstackNews.News.upsert_item(i) end)
-     end}
+     {TechstackNews.Crawlers, :rss, ["https://www.reddit.com/r/programming/.rss"]}},
+    {"*/30 * * * *", {TechstackNews.Crawlers, :rss, ["https://www.androidpolice.com/feed/"]}},
+    {"*/30 * * * *", {TechstackNews.Crawlers, :rss, ["https://www.xda-developers.com/feed/"]}},
+    {"*/30 * * * *", {TechstackNews.Crawlers, :rss, ["https://arstechnica.com/feed/"]}},
+    {"*/30 * * * *", {TechstackNews.Crawlers, :rss, ["https://www.engadget.com/rss.xml"]}}
   ]
 
 # Import environment specific config. This must remain at the bottom

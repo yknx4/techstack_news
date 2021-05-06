@@ -2,7 +2,7 @@
 # from environment variables. You can also hardcode secrets,
 # although such is generally not recommended and you have to
 # remember to add this file to your .gitignore.
-use Mix.Config
+import Config
 
 database_url =
   System.get_env("DATABASE_URL") ||
@@ -13,6 +13,7 @@ database_url =
 
 config :techstack_news, TechstackNews.Repo,
   # ssl: true,
+  database: "techstack",
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
@@ -35,7 +36,7 @@ config :techstack_news, TechstackNewsWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :techstack_news, TechstackNewsWeb.Endpoint, server: true
+config :techstack_news, TechstackNewsWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.

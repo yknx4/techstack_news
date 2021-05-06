@@ -9,7 +9,6 @@ defmodule TechstackNewsWeb.PageLive do
     before_cursor = Map.get(params, "before")
 
     items = News.list_items(after: after_cursor, before: before_cursor)
-    IO.inspect(params)
 
     {:ok,
      assign(socket,
