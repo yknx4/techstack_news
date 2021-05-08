@@ -17,7 +17,8 @@ defmodule TechstackNewsWeb.Router do
   scope "/", TechstackNewsWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/live", PageLive, :index
+    get "/", ItemController, :index
   end
 
   # Other scopes may use custom stacks.

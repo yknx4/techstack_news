@@ -3,10 +3,18 @@ defmodule TechstackNewsWeb.ItemController do
 
   alias TechstackNews.News
   alias TechstackNews.News.Item
+  alias TechstackNews.Repo
 
-  def index(conn, _params) do
-    items = News.list_items()
-    render(conn, "index.html", items: items)
+  def index(conn, params) do
+    after_cursor = Map.get(params, "after")
+    before_cursor = Map.get(params, "before")
+
+    items = News.list_items(after: after_cursor, before: before_cursor)
+
+    render(conn, "index.html",
+      results: items.entries |> Repo.preload([:locations]),
+      pagination: items.metadata
+    )
   end
 
   def new(conn, _params) do

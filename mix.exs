@@ -52,7 +52,8 @@ defmodule TechstackNews.MixProject do
       {:hackney, "~> 1.17.0"},
       {:nodejs, "~> 2.0"},
       {:paginator, "~> 1.0.4"},
-      {:quantum, "~> 3.0"}
+      {:quantum, "~> 3.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 
